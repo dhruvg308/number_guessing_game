@@ -6,6 +6,7 @@ int main(){
     int guess,random;
     int no_of_guess = 0;
     srand(time(0));
+    char input[100];
 
     random= rand() % 100 +1;
 //random=50;
@@ -13,8 +14,20 @@ int main(){
     printf("Welcome to the guesing game");
 
     do{
-        printf("\n Please enter a no. between 0-100 ");
-        scanf("%d",&guess);
+        printf("\nPlease enter a number between 1-100: ");
+        fgets(input, sizeof(input), stdin); 
+
+       
+        if (sscanf(input, "%d", &guess) != 1) {
+            printf("Invalid input. Please enter an integer.\n");
+            continue;  // Skip this iteration
+        }
+
+        if (guess < 1 || guess > 100) {
+            printf("Number out of range! Enter between 1 and 100.\n");
+            continue;
+        }
+        
         no_of_guess++ ;
 
         if(guess<random){
